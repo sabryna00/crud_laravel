@@ -35,6 +35,9 @@ class TurnoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+        ]);
         $created = $this->turno->create([
             'nome' => $request->input('nome')
         ]);
@@ -67,6 +70,9 @@ class TurnoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+        ]);
         $updated = $this->turno->where('id', $id)->update($request->except(['_token', '_method']));
 
         if ($updated) {
