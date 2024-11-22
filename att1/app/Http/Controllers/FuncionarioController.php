@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
 {
-    /**
-     * Exibe uma lista de todos os funcionários.
-     */
+
     public function index()
     {
         $funcionarios = Funcionario::with(['departamento', 'cargo', 'turno'])->get();
@@ -20,9 +18,7 @@ class FuncionarioController extends Controller
         return view('tabela_funcionario.funcionario', compact('funcionarios'));
     }
 
-    /**
-     * Mostra o formulário para criar um novo funcionário.
-     */
+
     public function create()
     {
         $departamentos = Departamento::all();
@@ -32,9 +28,6 @@ class FuncionarioController extends Controller
         return view('tabela_funcionario.funcionario_create', compact('departamentos', 'cargos', 'turnos'));
     }
 
-    /**
-     * Armazena um novo funcionário no banco de dados.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -51,9 +44,6 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios.index')->with('message', 'Funcionário cadastrado com sucesso!');
     }
 
-    /**
-     * Exibe os detalhes de um funcionário.
-     */
     public function show(Funcionario $funcionario)
     {
         $funcionario->load(['departamento', 'cargo', 'turno']);
@@ -61,9 +51,7 @@ class FuncionarioController extends Controller
         return view('tabela_funcionario.funcionario_show', compact('funcionario'));
     }
 
-    /**
-     * Mostra o formulário para editar os dados de um funcionário.
-     */
+
     public function edit(Funcionario $funcionario)
     {
         $departamentos = Departamento::all();
@@ -73,9 +61,6 @@ class FuncionarioController extends Controller
         return view('tabela_funcionario.funcionario_edit', compact('funcionario', 'departamentos', 'cargos', 'turnos'));
     }
 
-    /**
-     * Atualiza os dados de um funcionário no banco de dados.
-     */
     public function update(Request $request, Funcionario $funcionario)
     {
         $validated = $request->validate([
@@ -92,9 +77,7 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios.index')->with('message', 'Funcionário atualizado com sucesso!');
     }
 
-    /**
-     * Remove um funcionário do banco de dados.
-     */
+    
     public function destroy(Funcionario $funcionario)
     {
         $funcionario->delete();

@@ -4,31 +4,56 @@
             {{ __('Departamento') }}
         </h2>
     </x-slot>
-    
+
     @if (session()->has('message'))
-            <div class="bg-green-100 text-green-700 px-4 py-3 rounded mb-6">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-    
-    <a href="{{ route('departamentos.create') }}" class="mb-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Criar</a>
+        <div class="bg-green-100 text-green-700 px-4 py-3 rounded mb-6 shadow-md">
+            {{ session()->get('message') }}
+        </div>
+    @endif
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <table class="min-w-full bg-white dark:bg-gray-800">
-                    <thead>
+        <div class="flex justify-center mt-6">
+            <a href="{{ route('departamentos.create') }}"
+                class="inline-block px-6 py-2 bg-gray-500 text-white font-bold rounded-lg shadow hover:bg-gray-600 transition">
+                Criar Novo Departamento
+            </a>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Função</th>
+                            <th scope="col" class="px-6 py-3 text-left">ID</th>
+                            <th scope="col" class="px-6 py-3 text-left">Nome</th>
+                            <th scope="col" class="px-6 py-3 text-center">Ações</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white dark:bg-gray-800">
+
+                    <tbody>
                         @foreach ($departamentos as $departamento)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{{ $departamento->nome }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="{{ route('departamentos.edit', ['departamento' => $departamento->id]) }}" class="text-blue-600 hover:text-blue-900">Editar</a> |
-                                    <a href="{{ route('departamentos.destroy', ['departamento' => $departamento->id]) }}">Mostrar</a>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $departamento->id }}
+                                </th>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    {{ $departamento->nome }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+
+                                    <a href="{{ route('departamentos.edit', ['departamento' => $departamento->id]) }}"
+                                        class="inline-block px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-lg shadow hover:bg-gray-600 transition">
+                                        Editar
+                                    </a>
+                                    <a href="{{ route('departamentos.destroy', ['departamento' => $departamento->id]) }}"
+                                        class="inline-block px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-lg shadow hover:bg-gray-600 transition">
+                                        Mostrar
+                                    </a>
+                                </td>
                                 </td>
                             </tr>
                         @endforeach
@@ -37,4 +62,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

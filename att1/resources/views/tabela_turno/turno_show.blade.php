@@ -1,17 +1,20 @@
 <x-app-layout>
-    <h2>turno - {{ $turno->nome }}</h2>
 
+        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-sm">
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">Tem certeza que deseja excluir este turno?</p>
 
-    <div class="card">
-        <form class="card-form" action="{{ route('turnos.destroy', ['turno' => $turno->id]) }}" method="post"
-            enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="_method" value="DELETE" class="input-field">
-            <button id="button">Deletar</button>
+            <form action="{{ route('turnos.destroy', ['turno' => $turno->id]) }}" method="post"
+                class="space-y-4">
+                @csrf
+                <input type="hidden" name="_method" value="DELETE">
 
-
-
-
+                <div class="flex justify-center">
+                    <button type="submit" id="button"
+                        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300">
+                        Deletar Turno
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-
 </x-app-layout>

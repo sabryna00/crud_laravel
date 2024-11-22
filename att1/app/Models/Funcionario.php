@@ -9,9 +9,6 @@ class Funcionario extends Model
 {
     use HasFactory;
 
-    /**
-     * Define os campos que podem ser preenchidos em massa.
-     */
     protected $fillable = [
         'nome',
         'email',
@@ -21,25 +18,16 @@ class Funcionario extends Model
         'turno_id',
     ];
 
-    /**
-     * Relacionamento com a tabela departamentos.
-     */
     public function departamento()
     {
         return $this->belongsTo(Departamento::class);
     }
 
-    /**
-     * Relacionamento com a tabela cargos.
-     */
     public function cargo()
     {
         return $this->belongsTo(Cargo::class);
     }
 
-    /**
-     * Relacionamento com a tabela turnos.
-     */
     public function turno()
     {
         return $this->belongsTo(Turno::class);
